@@ -29,8 +29,13 @@
   box-sizing: border-box;
 }
 
+html,
 body {
-  min-width: 320px;
+  width: 100%;
+  overflow-x: clip;
+}
+
+body {
   min-height: 100vh;
   margin: 0;
   background:
@@ -221,6 +226,9 @@ h1 span,
 }
 
 .marca {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
   color: var(--tinta);
   font-size: 20px;
   font-weight: 850;
@@ -515,8 +523,10 @@ h1 span,
 }
 
 .boton-cantidad {
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  min-height: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -537,7 +547,9 @@ h1 span,
 
 .entrada-cantidad {
   width: 56px;
-  height: 40px;
+  min-width: 44px;
+  height: 44px;
+  min-height: 44px;
   padding: 4px;
   border: 1px solid var(--borde);
   border-radius: 9px;

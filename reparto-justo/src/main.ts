@@ -304,17 +304,37 @@ function dibujarFinal(actual: EstadoJuego): void {
 }
 
 function dibujar(): void {
+  const elementoActivo = document.activeElement;
+  const atributosDeFoco = [
+    "data-accion",
+    "data-entrada",
+    "data-comunidad",
+    "data-recurso",
+    "data-cambio",
+  ];
+  const selectorDeFoco =
+    elementoActivo instanceof HTMLElement && app.contains(elementoActivo)
+      ? atributosDeFoco
+          .map((atributo) => {
+            const valor = elementoActivo.getAttribute(atributo);
+            return valor === null
+              ? ""
+              : `[${atributo}="${CSS.escape(valor)}"]`;
+          })
+          .join("")
+      : "";
+
   if (estado === undefined) {
     dibujarInicio();
-    return;
-  }
-
-  if (estado.resultado !== "en-curso") {
+  } else if (estado.resultado !== "en-curso") {
     dibujarFinal(estado);
-    return;
+  } else {
+    dibujarPartida(estado);
   }
 
-  dibujarPartida(estado);
+  if (selectorDeFoco !== "") {
+    app.querySelector<HTMLElement>(selectorDeFoco)?.focus();
+  }
 }
 
 function esComunidadId(valor: string | undefined): valor is ComunidadId {
